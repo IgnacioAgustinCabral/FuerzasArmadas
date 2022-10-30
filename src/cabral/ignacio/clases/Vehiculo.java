@@ -1,10 +1,13 @@
 package cabral.ignacio.clases;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Vehiculo implements Comparable<Vehiculo> {
+public abstract class Vehiculo implements Comparable<Vehiculo> {
 	private String codigoIdentificacion;
 	private Integer capacidad;
+	private final List<TipoBatalla> aptoBatalla = new ArrayList<>();
 
 	public Vehiculo(String codigoIdentificacion, Integer capacidad) {
 		this.codigoIdentificacion = codigoIdentificacion;
@@ -27,7 +30,12 @@ public class Vehiculo implements Comparable<Vehiculo> {
 		this.capacidad = capacidad;
 	}
 	
+	public List<TipoBatalla> getAptoBatalla() {
+		return aptoBatalla;
+	}
 	
+	public abstract void llenarListaAptoBatalla();
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigoIdentificacion);

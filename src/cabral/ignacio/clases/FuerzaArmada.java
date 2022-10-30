@@ -47,10 +47,10 @@ public class FuerzaArmada {
 		return batallas.contains(batallaABuscar);
 	}
 
-	public Batalla crearBatalla(String nombre, Integer inicio, Integer fin, TipoBatalla tipo) {
-		
-		return new Batalla(nombre,inicio,fin,tipo);
-	}
+//	public Batalla crearBatalla(String nombre, Integer inicio, Integer fin, TipoBatalla tipo) {
+//		
+//		return new Batalla(nombre,inicio,fin,tipo);
+//	}
 	
 	
 }

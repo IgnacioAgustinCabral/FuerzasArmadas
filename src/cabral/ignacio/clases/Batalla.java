@@ -1,22 +1,26 @@
 package cabral.ignacio.clases;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class Batalla implements Comparable<Batalla>{
+import cabral.ignacio.excepciones.VehiculoIncompatibleException;
+
+public class Batalla implements Comparable<Batalla> {
 	private String nombre;
 	private Integer inicio;
 	private Integer fin;
 	private Set<Vehiculo> convoy = new HashSet<>();
-	private TipoBatalla tipo;
-	
-	public Batalla(String nombre, Integer inicio, Integer fin, TipoBatalla tipo) {
+	private List<TipoBatalla> tipo = new ArrayList<>();
+
+	public Batalla(String nombre, Integer inicio, Integer fin, List<TipoBatalla> tipo) {
 		super();
 		this.nombre = nombre;
 		this.inicio = inicio;
 		this.fin = fin;
-		this.tipo = tipo;
+		this.tipo.addAll(tipo);
 	}
 
 	public String getNombre() {
@@ -50,7 +54,7 @@ public class Batalla implements Comparable<Batalla>{
 	public void setConvoy(Set<Vehiculo> convoy) {
 		this.convoy = convoy;
 	}
-	
+
 	public TipoBatalla getTipo() {
 		return tipo;
 	}
@@ -59,8 +63,14 @@ public class Batalla implements Comparable<Batalla>{
 		this.tipo = tipo;
 	}
 
-	public void agregarVehiculoAConvoy(Vehiculo vehiculo) {
-		this.getConvoy().add(vehiculo);
+	public void agregarVehiculoAConvoy(Vehiculo vehiculo) throws VehiculoIncompatibleException {
+
+		if (vehiculo.getAptoBatalla().contains(this.getTipo())) {
+			this.getConvoy().add(vehiculo);
+		} else {
+			throw new VehiculoIncompatibleException("Vehiculo incompatible con tipo de batalla");
+		}
+
 	}
 
 	@Override
@@ -84,6 +94,5 @@ public class Batalla implements Comparable<Batalla>{
 	public int compareTo(Batalla o) {
 		return this.getNombre().compareTo(o.getNombre());
 	}
-		
-	
+
 }
